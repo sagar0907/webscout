@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Scout</title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/newtab.css">
+    <script src="../js/jquery.js"></script>
+    <script src="../js/jquery-ui.min.js"></script>
+    <script src="../js/util.js"></script>
+    <script src="../js/home_screen.js"></script>
+    <script src="../js/settings_screen.js"></script>
+    <script src="../js/newtab.js"></script>
+</head>
+<body>
+<div id="home_screen">
+    <div class="outer-container">
+        <div class="row">
+            <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-lg-4 col-md-4 col-sm-6">
+                <div class="search_item_name_top"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-lg-4 col-md-4 col-sm-6">
+                <div id="search_bar" class="row">
+                    <div class="site_icon_top">
+                    </div>
+                    <form class="search_form">
+                        <div id="search_input" class="form-group">
+                            <input class="form-control form-control-lg" type="text">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="search_site_list">
+        </div>
+        <div id="edit">
+            <div id="edit_icon">
+                <img src="../images/settings.svg">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="edit_screen" style="display: none">
+    <div class="header_row row">
+        <div id="settings_back_button">
+            <img src="../images/left-arrow.svg">
+        </div>
+        <div class="settings_header">Settings</div>
+    </div>
+    <div class="row outer-container">
+        <div id="settings_list">
+            <ul class="row" id="edit_site_list">
+            </ul>
+        </div>
+        <div id="delete_bar">
+            <div id="delete_options">
+                <div id="delete_close">
+                    <img src="../images/delete_closed.svg">
+                </div>
+                <div id="delete_open">
+                    <img src="../images/delete_open.svg">
+                </div>
+            </div>
+        </div>
+        <div id="add_site_btn" class="add_site_closed">
+            <div class="add_site_icon"><img src="../images/plus-symbol.svg"></div>
+            <div id="settings_new">
+                <h2 class="new_site_header">Add a site</h2>
+                <form id="add_site_form">
+                    <div class="form-group">
+                        <label for="new_site_name">Name:</label>
+                        <input id="new_site_name" type="text" class="form-control" placeholder="DuckDuckGo">
+                    </div>
+                    <div class="form-group">
+                        <label for="new_site_url">Search Url:</label>
+                        <input id="new_site_url" type="url" class="form-control"
+                               placeholder="https://duckduckgo.com/?q={{query}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="new_site_color">Color (in hex):</label>
+                        <div class="row">
+                            <div id="color-preview"></div>
+                            <input id="new_site_color" type="text" class="form-control"
+                                   value="#555555">
+                            <button id="submit_site_btn" type="submit" class="btn">Add</button>
+                        </div>
+                    </div>
+                    <div id="form_info"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
