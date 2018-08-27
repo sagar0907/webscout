@@ -149,6 +149,7 @@ let sites = function () {
             });
         if (sameElements) {
             siteOrder = new_order;
+            updateStorage();
             return true;
         }
         return false;
@@ -157,12 +158,14 @@ let sites = function () {
     function activateSite(name) {
         if(siteData[name]) {
             siteData[name].active = true;
+            updateStorage();
         }
     }
 
     function deactivateSite(name) {
         if(siteData[name]) {
             siteData[name].active = false;
+            updateStorage();
         }
     }
 
@@ -176,6 +179,7 @@ let sites = function () {
         };
         siteOrder.push(name);
         siteData[name] = site;
+        updateStorage();
     }
 
     function deleteSite(name) {
@@ -186,6 +190,7 @@ let sites = function () {
         if (index > -1) {
             siteOrder.splice(index, 1);
         }
+        updateStorage();
     }
 
     function getSites() {
@@ -219,6 +224,26 @@ let sites = function () {
         selected_site = name;
     }
 
+    function updateStorage() {
+        try {
+            chrome.storage.sync.set({order: siteOrder, data: siteData}, function () {
+
+            });
+        } catch (e) {
+        }
+    }
+
+    function fetchFromStorage() {
+        chrome.storage.sync.get(['order', 'data'], function (obj) {
+            let order = obj && obj.order,
+                data = obj && obj.data;
+            if (data && order && order.length > 0) {
+                siteOrder = order;
+                siteData = data;
+            }
+        });
+    }
+
     return {
         getSites: getSites,
         setOrder: setOrder,
@@ -227,7 +252,8 @@ let sites = function () {
         addNewSite: addNewSite,
         deleteSite: deleteSite,
         getSelectedSite: getSelectedSite,
-        setSelectedSite: setSelectedSite
+        setSelectedSite: setSelectedSite,
+        fetchFromStorage: fetchFromStorage
     }
 }();
 
@@ -237,7 +263,6 @@ function getSites() {
 
 
 function contextMenuClicked(info, tab) {
-    console.log(info, tab);
     if (info && info.selectionText) {
         openNewScoutTab(info.menuItemId, info.selectionText);
     }
@@ -284,6 +309,7 @@ chrome.contextMenus.create({
 }, function () {
 });
 
+sites.fetchFromStorage();
 createContextMenus(sites.getSites());
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {

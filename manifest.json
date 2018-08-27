@@ -3,7 +3,7 @@
   "name": "Web Scout",
   "short_name": "Web Scout",
   "description": "Search everything, everywhere.",
-  "version": "0.0.0.2",
+  "version": "0.0.0.3",
   "browser_action": {
     "default_icon": "images/logo_48.png",
     "default_title": "Web Scout"
@@ -20,7 +20,8 @@
     "tabs",
     "activeTab",
     "contextMenus",
-    "background"
+    "background",
+    "storage"
   ],
   "background": {
     "scripts": [
